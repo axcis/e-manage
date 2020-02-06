@@ -1,0 +1,26 @@
+{% extends('common/base_input.twig') %}
+
+{% block js%}
+	
+	$(function() {
+		$(".datepicker").datepicker('option', {
+			maxDate: 0
+		});
+	});
+	
+{% endblock %}
+
+{% block title %}
+	{{ form.form_title("資格手当申請"~value) }}
+{% endblock %}
+
+{% block inputform %}
+	<dl>
+		<dt>{{ form.set_col("社員名", 1) }}</dt>
+		<dd>{{ form_select('employee_id', employee_map, employee_id)|raw }}</dd>
+		<dt>{{ form.set_col("資格名", 1) }}</dt>
+		<dd>{{ form_select('qualification_id', qualification_map, qualification_id)|raw }}</dd>
+		<dt>{{ form.set_col("申請日", 1) }}</dt>
+		<dd>{{ form.input_date("request_date", request_date) }}</dd>
+	</dl>
+{% endblock %}

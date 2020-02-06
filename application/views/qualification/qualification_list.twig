@@ -1,0 +1,40 @@
+{% extends('common/base_list.twig') %}
+
+{% block js %}
+	{{ include('common/pager_js.twig') }}
+	{{ header.responsive_js("qualification-table") }}
+{% endblock %}
+
+{% block title %}
+	資格手当マスタ一覧
+{% endblock %}
+
+{% block search %}
+	{{ main.text_block("search-col", "資格名", '', 'search_name', search_name) }}
+{% endblock %}
+
+{% block main %}
+	<div id="list-area">
+		{% if list|length == 0 %}
+			{{ main.info_msg("データはありません。")}}
+		{% else %}
+			{{ main.pager_block() }}
+			<div id="qualification-table">
+				<table class="list-table">
+					{{ include('parts/list_col.twig')}}
+					<tbody id="container">
+						{% for key,item in list %}
+							<tr>
+								<td class="ta-center"><a href="{{ base_url }}qualification/QualificationRegist/modify_input/{{ item.class_id }}/{{ item.rank }}"><i class="far fa-edit" aria-hidden="true"></i></a></td>
+								<td class="ta-center">{{ item.class_id }}</td>
+								<td class="ta-center">{{ item.rank }}</td>
+								<td class="ta-center">{{ item.name }}</td>
+								<td class="ta-right">{{ item.allowance_price }} 円</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		{% endif %}
+	</div>
+{% endblock %}

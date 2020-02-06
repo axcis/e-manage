@@ -177,6 +177,13 @@ class MY_Controller extends CI_Controller {
 	}
 	
 	/**
+	 * 一覧に戻る
+	 */
+	public function return_list($class_path) {
+		redirect(base_url(). $class_path. 'List');
+	}
+	
+	/**
 	 * ヘルパーに定義されているTwig関数を追加
 	 */
 	private function add_function() {
@@ -200,6 +207,9 @@ class MY_Controller extends CI_Controller {
 		
 		//コンテンツ情報の記載
 		$list[] = array('btn_name' => 'トップ', 'url' => base_url(). 'TopPage', 'key' => 'top');
+		$list[] = array('btn_name' => '社員登録', 'url' => base_url(). 'employee/EmployeeList', 'key' => 'employee');
+		$list[] = array('btn_name' => '資格手当マスタ', 'url' => base_url(). 'qualification/QualificationList', 'key' => 'qualification');
+		$list[] = array('btn_name' => '資格手当申請登録', 'url' => base_url(). 'allowance/AllowanceList', 'key' => 'allowance');
 		
 		return $list;
 	}

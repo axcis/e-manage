@@ -57,10 +57,6 @@ select{
 	position:relative;
 }
 
-#search-area-info input {
-	width: 200px;
-}
-
 #info-msg{
 	text-align: center;
 }

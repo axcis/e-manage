@@ -1,0 +1,39 @@
+{% extends('common/base_list.twig') %}
+
+{% block js %}
+	{{ include('common/pager_js.twig') }}
+	{{ header.responsive_js("allowance-table") }}
+{% endblock %}
+
+{% block title %}
+	資格手当申請一覧
+{% endblock %}
+
+{% block search %}
+	{{ main.select_block("search-col", "社員名", 'search_employee_id', employee_map, search_employee_id) }}
+	{{ main.select_block("search-col", "資格名", 'qualification_id', qualification_map, qualification_id) }}
+{% endblock %}
+
+{% block main %}
+	<div id="list-area">
+		{% if list|length == 0 %}
+			{{ main.info_msg("データはありません。")}}
+		{% else %}
+			{{ main.pager_block() }}
+			<div id="allowance-table">
+				<table class="list-table">
+					{{ include('parts/list_col.twig')}}
+					<tbody id="container">
+						{% for key,item in list %}
+							<tr>
+								<td class="ta-center">{{ item.employee_id }}</td>
+								<td class="ta-center">{{ item.qualification_name }}</td>
+								<td class="ta-center">{{ item.request_date|date('Y年n月j日') }}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		{% endif %}
+	</div>
+{% endblock %}

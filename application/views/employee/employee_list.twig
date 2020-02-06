@@ -1,0 +1,43 @@
+{% extends('common/base_list.twig') %}
+
+{% block js %}
+	{{ include('common/pager_js.twig') }}
+	{{ header.responsive_js("employee-table") }}
+{% endblock %}
+
+{% block title %}
+	社員一覧
+{% endblock %}
+
+{% block search %}
+	{{ main.text_block("search-col", "社員名", '', 'search_name', search_name) }}
+	<div class="search-col search-check">
+		{{ form_checkbox('retirement_show', '1', '退職者も表示する', 'retirement_show', retirement_show_checked)|raw }}
+	</div>
+{% endblock %}
+
+{% block main %}
+	<div id="list-area">
+		{% if list|length == 0 %}
+			{{ main.info_msg("データはありません。")}}
+		{% else %}
+			{{ main.pager_block() }}
+			<div id="employee-table">
+				<table class="list-table">
+					{{ include('parts/list_col.twig')}}
+					<tbody id="container">
+						{% for key,item in list %}
+							<tr>
+								<td class="ta-center"><a href="{{ base_url }}employee/EmployeeRegist/modify_input/{{ item.id }}"><i class="far fa-edit" aria-hidden="true"></i></a></td>
+								<td class="ta-center">{{ item.id }}</td>
+								<td class="ta-center">{{ item.name }}</td>
+								<td class="ta-center">{{ item.hiragana }}</td>
+								<td class="ta-center">{{ item.retirement }}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		{% endif %}
+	</div>
+{% endblock %}

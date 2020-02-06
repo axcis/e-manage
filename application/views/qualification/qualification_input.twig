@@ -1,0 +1,24 @@
+{% extends('common/base_input.twig') %}
+
+{% block title %}
+	{{ form.form_title("資格手当マスタ"~value) }}
+{% endblock %}
+
+{% block inputform %}
+	<dl>
+		<dt>{{ form.set_col("分類ID", 1) }}</dt>
+		{% if action == 'regist' %}
+			<dd>{{ form.input("class_id", class_id, "text", "", "", 50) }}</dd>
+		{% else %}
+			{{ form.form_hidden("", "class_id", class_id) }}
+			{{ form.form_hidden("", "old_rank", old_rank) }}
+			<dd>{{ class_id }}</dd>
+		{% endif %}
+		<dt>{{ form.set_col("ランク", 1) }}</dt>
+		<dd>{{ form_select('rank', rank_map, rank)|raw }}</dd>
+		<dt>{{ form.set_col("資格名", 1) }}</dt>
+		<dd>{{ form.input("name", name, "text", "", "", 50) }}</dd>
+		<dt>{{ form.set_col("手当金額", 1) }}</dt>
+		<dd>{{ form.input("allowance_price", allowance_price, "text", "", "", 50) }}</dd>
+	</dl>
+{% endblock %}

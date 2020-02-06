@@ -1,0 +1,24 @@
+<h4>退職社員情報</h4>
+{% if retirement_list|length == 0 %}
+	{{ main.info_msg("退職社員情報はありません。")}}
+{% else %}
+	<div id="retirement-table">
+		<table class="list-table">
+			<thead>
+				<tr class="list-head">
+					{% for item in retirement_list_col %}
+						<td class="width-{{ item.width }}">{{ item.value }}</td>
+					{% endfor %}
+				</tr>
+			</thead>
+			<tbody id="container">
+				{% for key,item in retirement_list %}
+					<tr>
+						<td class="ta-center">{{ item.name }}</td>
+						<td class="ta-center">{{ item.retirement_date|date('Y年n月j日') }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endif %}

@@ -1,0 +1,24 @@
+<h4>正社員登用情報</h4>
+{% if regular_list|length == 0 %}
+	{{ main.info_msg("正社員登用情報はありません。")}}
+{% else %}
+	<div id="contract-table">
+		<table class="list-table">
+			<thead>
+				<tr class="list-head">
+					{% for item in regular_list_col %}
+						<td class="width-{{ item.width }}">{{ item.value }}</td>
+					{% endfor %}
+				</tr>
+			</thead>
+			<tbody id="container">
+				{% for key,item in regular_list %}
+					<tr>
+						<td class="ta-center">{{ item.employee_id }}</td>
+						<td class="ta-center">{{ item.regular_date|date('Y年n月j日') }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endif %}

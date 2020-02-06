@@ -1,5 +1,67 @@
-{% extends('common/base_list.twig') %}
+{{ include('common/header.twig') }}
+{{ include('common/body_header.twig') }}
 
-{% block main %}
+{% import 'parts/form.twig' as form %}
+{% import 'parts/main_body.twig' as main %}
+
+{% import 'parts/header.twig' as header %}
+
+{{ header.javascript_start }}
+	{{ header.responsive_js("hire-table") }}
+	{{ header.responsive_js("retirement-table") }}
+	{{ header.responsive_js("contract-table") }}
+	{{ header.responsive_js("regular-table") }}
+	{{ header.responsive_js("vacation-date-table") }}
+	{{ header.responsive_js("allowance-table") }}
+{{ header.javascript_end }}
+
+{{ main.main_start }}
+	{# サイドメニュー #}
+	<div id="side-menu">
+		<div id="nav-drawer">
+			<input id="nav-input" type="checkbox" class="nav-unshown">
+			<label id="nav-open" for="nav-input"><span></span></label>
+			<label class="nav-unshown" id="nav-close" for="nav-input"></label>
+			<div id="nav-content">
+				{% for item in contents_list %}
+					<a href="{{ item.url }}" class="square_btn {% if class_key == item.key %}square_btn_select{% endif %}">{{ item.btn_name }}</a>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
 	
-{% endblock %}
+	<div id="main-wrapper">
+		<div id="description">
+			<p>{{ search_month|date('Y年n月') }}各雇用情報一覧</p>
+		</div>
+		{% if no_search != '1' %}
+			{{ form.form_start("search-form", "", "search-form", base_url~"TopPage/search/", "post") }}
+				<div id="search-area">
+					<p id="search-area-title">検索</p>
+					<div id="search-area-info">
+						{{ main.select_block("search-col", "年月", 'search_month', month_map, search_month) }}
+					</div>
+					{{ form.search_submit(base_url, "TopPage") }}
+				</div>
+			{{ form.form_end }}
+		{% endif %}
+		<div id="list-area">
+			
+			{{ include('top/hire_list.twig') }}
+			{{ main.spacer }}
+			{{ include('top/retirement_list.twig') }}
+			{{ main.spacer }}
+			{{ include('top/contract_list.twig') }}
+			{{ main.spacer }}
+			{{ include('top/regular_list.twig') }}
+			{{ main.spacer }}
+			{{ include('top/vacation_date_list.twig') }}
+			{{ main.spacer }}
+			{{ include('top/allowance_list.twig') }}
+			
+		</div>
+	</div>
+	
+{{ main.main_end }}
+
+{{ include('common/footer.twig') }}

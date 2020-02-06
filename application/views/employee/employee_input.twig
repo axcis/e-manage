@@ -1,0 +1,57 @@
+{% extends('common/base_input.twig') %}
+
+{% block js %}
+
+	window.onload = function() {
+		var flg = $("#retirement").prop('checked');
+		list_display(flg);
+	}
+	
+	$(function() {
+		$("#retirement").on("click", function(){
+			var flg = $(this).prop('checked');
+			list_display(flg);
+		});
+	});
+	
+	function list_display(flg) {
+		if (flg == true) {
+			$(".retirement").css('display', '');
+		} else {
+			$(".retirement").css('display', 'none');
+		}
+	}
+{% endblock %}
+
+{% block title %}
+	{{ form.form_title("社員"~value) }}
+{% endblock %}
+
+{% block inputform %}
+	<dl>
+		<dt>{{ form.set_col("名前", 1) }}</dt>
+		<dd>{{ form.input("name", name, "text", "", "", 50) }}</dd>
+		<dt>{{ form.set_col("名前(かな)", 1) }}</dt>
+		<dd>{{ form.input("hiragana", hiragana, "text", "", "", 50) }}</dd>
+		<dt>{{ form.set_col("入社日", 1) }}</dt>
+		<dd>{{ form.input_date("hire_date", hire_date) }}</dd>
+		<dt>{{ form.set_col("初回有休付与日") }}</dt>
+		<dd>{{ form.input_date("give_date", give_date) }}</dd>
+		{% if action == 'regist' %}
+			<dt>{{ form.set_col("試用期間", 1) }}</dt>
+			<dd>{{ form_select('trial', trial_map, trial)|raw }}</dd>
+		{% endif %}
+		{% if action == 'modify' %}
+			<dt>{{ form.set_col("退職情報") }}</dt>
+			<dd>
+				<p class="form-check-area">
+					{{ form_checkbox("retirement", 1, '退職済み', 'retirement', retirement_checked)|raw }}
+				</p>
+			</dd>
+			<dt class="retirement">{{ form.set_col("退職日") }}</dt>
+			<dd class="retirement">
+				{{ form.input_date("retirement_date", retirement_date) }}
+			</dd>
+		{% endif %}
+	</dl>
+{% endblock %}

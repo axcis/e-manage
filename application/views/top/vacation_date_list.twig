@@ -1,0 +1,25 @@
+<h4>有休付与情報</h4>
+{% if vacation_date_list|length == 0 %}
+	{{ main.info_msg("有休付与情報はありません。")}}
+{% else %}
+	<div id="vacation-date-table">
+		<table class="list-table">
+			<thead>
+				<tr class="list-head">
+					{% for item in vacation_date_list_col %}
+						<td class="width-{{ item.width }}">{{ item.value }}</td>
+					{% endfor %}
+				</tr>
+			</thead>
+			<tbody id="container">
+				{% for key,item in vacation_date_list %}
+					<tr>
+						<td class="ta-center">{{ item.employee_id }}</td>
+						<td class="ta-center">{{ item.give_date|date('Y年n月j日') }}</td>
+						<td class="ta-center">{{ item.work_year }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endif %}

@@ -132,4 +132,4 @@ $autoload['language'] = array('dictionary', 'msg', 'mail', 'id_pass');
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array();
+$autoload['model'] = array('allowance/AllowanceBaseModel');

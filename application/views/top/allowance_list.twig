@@ -1,0 +1,25 @@
+<h4>資格手当付与情報</h4>
+{% if allowance_list|length == 0 %}
+	{{ main.info_msg("資格手当付与情報はありません。")}}
+{% else %}
+	<div id="allowance-table">
+		<table class="list-table">
+			<thead>
+				<tr class="list-head">
+					{% for item in allowance_list_col %}
+						<td class="width-{{ item.width }}">{{ item.value }}</td>
+					{% endfor %}
+				</tr>
+			</thead>
+			<tbody id="container">
+				{% for key,item in allowance_list %}
+					<tr>
+						<td class="ta-center">{{ item.employee_id }}</td>
+						<td class="ta-center">{{ item.qualification_name }}</td>
+						<td class="ta-center">{{ item.allowance_price }} 円</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endif %}
