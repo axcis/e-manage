@@ -8,7 +8,7 @@
 class TopPageModel extends MY_Model {
 	
 	/**
-	 * 年月のマッピング(前後半年)
+	 * 年月のマッピング(前半年と後1年)
 	 */
 	public function get_month_map() {
 		
@@ -24,8 +24,8 @@ class TopPageModel extends MY_Model {
 		//当月
 		$map[$month] = date('Y年n月', strtotime($month));
 		
-		//後半年
-		for ($i = 0; $i <= 6; $i++) {
+		//後1年
+		for ($i = 0; $i <= 12; $i++) {
 			$target = strtotime("+$i month", strtotime($month));
 			$map[date('Y-m', $target)] = date('Y年n月', $target);
 		}

@@ -14,6 +14,11 @@ $lang['err_over'] = "[%0]が[%1]を超えています。";
 $lang['err_bigger'] = "[%0]は[%1]よりも大きい値で入力してください。";
 $lang['err_not_integrity'] = "[%0]が0以下の入力です。";
 
+$lang['err_select_date_before'] = "[%0]は[%1]より前の日付を選択してください。";
+$lang['err_select_date_after'] = "[%0]は[%1]より後の日付を選択してください。";
+$lang['err_select_time_before'] = "[%0]は[%1]より前の時間を選択してください。";
+$lang['err_select_time_after'] = "[%0]は[%1]より後の時間を選択してください。";
+
 //処理完了メッセージ
 $lang['db_registed'] = "登録しました。";
 $lang['db_modified'] = "更新しました。";

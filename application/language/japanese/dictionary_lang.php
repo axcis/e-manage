@@ -11,7 +11,8 @@ $lang['hiragana'] = '名前(かな)';
 $lang['hire_date'] = '入社日';
 $lang['give_date'] = '初回有休付与日';
 $lang['trial'] = '試用期間';
-$lang['retirement_date'] = "退職日";
+$lang['retirement_date'] = '退職日';
+$lang['extension_contract_date'] = '延長期日';
 
 //資格
 $lang['class_id'] = '分類ID';

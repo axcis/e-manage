@@ -3,22 +3,28 @@
 {% block js %}
 
 	window.onload = function() {
-		var flg = $("#retirement").prop('checked');
-		list_display(flg);
+		var retirement_flg = $("#retirement").prop('checked');
+		var extension_flg = $("#extension").prop('checked');
+		list_display("retirement", retirement_flg);
+		list_display("extension", extension_flg);
 	}
 	
 	$(function() {
 		$("#retirement").on("click", function(){
 			var flg = $(this).prop('checked');
-			list_display(flg);
+			list_display("retirement", flg);
+		});
+		$("#extension").on("click", function(){
+			var flg = $(this).prop('checked');
+			list_display("extension", flg);
 		});
 	});
 	
-	function list_display(flg) {
+	function list_display(cls, flg) {
 		if (flg == true) {
-			$(".retirement").css('display', '');
+			$("." + cls).css('display', '');
 		} else {
-			$(".retirement").css('display', 'none');
+			$("." + cls).css('display', 'none');
 		}
 	}
 {% endblock %}
@@ -51,6 +57,16 @@
 			<dt class="retirement">{{ form.set_col("退職日") }}</dt>
 			<dd class="retirement">
 				{{ form.input_date("retirement_date", retirement_date) }}
+			</dd>
+			<dt>{{ form.set_col("契約社員延長") }}</dt>
+			<dd>
+				<p class="form-check-area">
+					{{ form_checkbox("extension", 1, '契約社員延長', 'extension', extension_checked)|raw }}
+				</p>
+			</dd>
+			<dt class="extension">{{ form.set_col("延長期日") }}</dt>
+			<dd class="extension">
+				{{ form.input_date("extension_contract_date", extension_contract_date) }}
 			</dd>
 		{% endif %}
 	</dl>

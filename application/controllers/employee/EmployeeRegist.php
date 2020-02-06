@@ -68,6 +68,7 @@ class EmployeeRegist extends MY_Controller {
 		
 		$this->load->model('employee/EmployeeRegistModel', 'model');
 		$this->load->library('dao/EmployeeDao');
+		$this->load->library('dao/EmployeeStatusDao');
 		
 		$input = $this->get_attribute();
 		
@@ -76,7 +77,8 @@ class EmployeeRegist extends MY_Controller {
 		if ($msgs != null) {
 			$this->set_err_info($msgs);
 			$this->set('delete_disable', '1');
-			if ($input['retirement'] == '1') $this->set('retirement_checked', array(1));
+			if (isset($input['retirement'])) $this->set('retirement_checked', array(1));
+			if (isset($input['extension'])) $this->set('extension_checked', array(1));
 			$this->view('employee/employee_input');
 			return;
 		}

@@ -47,10 +47,12 @@ class EmployeeRegistModel extends MY_Model {
 		
 		$msgs = array();
 		
+		$id = $input['id'];
 		$name = $input['name'];
 		$hiragana = $input['hiragana'];
 		$hire_date = $input['hire_date'];
 		$retirement = isset($input['retirement']) ? $input['retirement'] : '';
+		$extension = isset($input['extension']) ? $input['extension'] : '';
 		
 		//未入力・未選択チェック
 		if (trim($name) == '') $msgs[] = $this->lang->line('err_required', array($this->lang->line('name')));
@@ -66,6 +68,18 @@ class EmployeeRegistModel extends MY_Model {
 		//退職済みの場合、退職日未選択はエラー
 		if ($input['action'] == 'modify' && $retirement == '1') {
 			if ($input['retirement_date'] == '') $msgs[] = $this->lang->line('err_not_select', array($this->lang->line('retirement_date')));
+		}
+		
+		if ($input['action'] == 'modify' && $extension == '1') {
+			//契約社員期間延長の場合、期日未選択はエラー
+			if ($input['extension_contract_date'] == '') $msgs[] = $this->lang->line('err_not_select', array($this->lang->line('extension_contract_date')));
+			//期日が元々の正社員登用日より前の場合はエラー
+			$this->set_table(EmployeeStatusDao::TABLE_NAME);
+			
+			$this->add_select(EmployeeStatusDao::COL_REGULAR_DATE);
+			$this->add_where(EmployeeStatusDao::COL_EMPLOYEE_ID, $id);
+			$info = $this->do_select_info();
+			if ($input['extension_contract_date'] <= $info[EmployeeStatusDao::COL_REGULAR_DATE]) $msgs[] = $this->lang->line('err_select_date_after', array($this->lang->line('extension_contract_date'), '正社員登用日'));;
 		}
 		
 		return $msgs;
@@ -146,6 +160,8 @@ class EmployeeRegistModel extends MY_Model {
 	 */
 	public function db_modify($input) {
 		
+		$this->db_trans_start();
+		
 		$this->set_table(EmployeeDao::TABLE_NAME);
 		
 		$this->add_col_val(EmployeeDao::COL_NAME, $input['name']);
@@ -163,6 +179,16 @@ class EmployeeRegistModel extends MY_Model {
 		$this->add_where(EmployeeDao::COL_ID, $input['id']);
 		
 		$this->do_update();
+		
+		//契約社員延長の場合は、雇用形態情報を更新する
+		if (isset($input['extension'])) {
+			$this->set_table(EmployeeStatusDao::TABLE_NAME);
+			$this->add_col_val(EmployeeStatusDao::COL_REGULAR_DATE, $input['extension_contract_date']);
+			$this->add_where(EmployeeStatusDao::COL_EMPLOYEE_ID, $input['id']);
+			$this->do_update();
+		}
+		
+		$this->db_trans_commit();
 	}
 }
 ?>
