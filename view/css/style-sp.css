@@ -224,13 +224,13 @@ img{
 	min-width: 650px;
 }
 
-.list-table tbody td {
-	vertical-align: middle;
+.list-table tbody tr {
+	height: 40px;
 }
 
-/* 勤怠 */
-#timerecord-table table tbody tr {
-	height: 40px;
+.list-table tbody td {
+	vertical-align: middle;
+	font-size: 18px;
 }
 
 .dl-area {
