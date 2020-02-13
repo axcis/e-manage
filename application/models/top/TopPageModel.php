@@ -93,6 +93,36 @@ class TopPageModel extends MY_Model {
 	}
 	
 	/**
+	 * 入社半年経過社員情報(入社祝い金)
+	 */
+	public function get_half_year_employee_list($month) {
+		
+		$this->set_table(EmployeeDao::TABLE_NAME);
+		
+		$this->add_select(EmployeeDao::COL_NAME);
+		$this->add_select(EmployeeDao::COL_HALF_HIRE_DATE);
+		
+		$this->add_where_like(EmployeeDao::COL_HALF_HIRE_DATE, $month, self::WILD_CARD_AFTER);
+		
+		return $this->do_select();
+	}
+	
+	/**
+	 * 入社一年経過社員情報(入社祝い金)
+	 */
+	public function get_one_year_employee_list($month) {
+		
+		$this->set_table(EmployeeDao::TABLE_NAME);
+		
+		$this->add_select(EmployeeDao::COL_NAME);
+		$this->add_select(EmployeeDao::COL_ONE_YEAR_HIRE_DATE);
+		
+		$this->add_where_like(EmployeeDao::COL_ONE_YEAR_HIRE_DATE, $month, self::WILD_CARD_AFTER);
+		
+		return $this->do_select();
+	}
+	
+	/**
 	 * 退職社員情報
 	 */
 	public function get_retirement_list($month) {
@@ -224,6 +254,32 @@ class TopPageModel extends MY_Model {
 		
 		$list_col[] = array('width' => 150, 'value' => '社員名');
 		$list_col[] = array('width' => 150, 'value' => '退職日');
+		
+		return $list_col;
+	}
+	
+	/**
+	 * 入社半年経過社員情報項目名
+	 */
+	public function get_halr_year_employee_list_col() {
+		
+		$list_col = array();
+		
+		$list_col[] = array('width' => 150, 'value' => '社員名');
+		$list_col[] = array('width' => 150, 'value' => '入社半年後日付');
+		
+		return $list_col;
+	}
+	
+	/**
+	 * 入社一年経過社員情報項目名
+	 */
+	public function get_one_year_employee_list_col() {
+		
+		$list_col = array();
+		
+		$list_col[] = array('width' => 150, 'value' => '社員名');
+		$list_col[] = array('width' => 150, 'value' => '入社一年後日付');
 		
 		return $list_col;
 	}
