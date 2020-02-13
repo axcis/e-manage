@@ -28,6 +28,8 @@ class TopPage extends MY_Controller {
 		//各List取得
 		$this->set('hire_list', $this->model->get_hire_list($month));
 		$this->set('retirement_list', $this->model->get_retirement_list($month));
+		$this->set('halr_year_employee_list', $this->model->get_half_year_employee_list($month));
+		$this->set('one_year_employee_list', $this->model->get_one_year_employee_list($month));
 		$this->set('contract_list', $this->model->get_contract_list($employee_map, $month));
 		$this->set('regular_list', $this->model->get_regular_list($employee_map, $month));
 		$this->set('vacation_date_list', $this->model->get_vacation_date_list($employee_map, $month));
@@ -36,6 +38,8 @@ class TopPage extends MY_Controller {
 		//各項目
 		$this->set('hire_list_col', $this->model->get_hire_list_col());
 		$this->set('retirement_list_col', $this->model->get_retirement_list_col());
+		$this->set('halr_year_employee_list_col', $this->model->get_halr_year_employee_list_col());
+		$this->set('one_year_employee_list_col', $this->model->get_one_year_employee_list_col());
 		$this->set('contract_list_col', $this->model->get_contract_list_col());
 		$this->set('regular_list_col', $this->model->get_regular_list_col());
 		$this->set('vacation_date_list_col', $this->model->get_vacation_date_list_col());
@@ -68,6 +72,8 @@ class TopPage extends MY_Controller {
 		//各List取得
 		$this->set('hire_list', $this->model->get_hire_list($month));
 		$this->set('retirement_list', $this->model->get_retirement_list($month));
+		$this->set('halr_year_employee_list', $this->model->get_half_year_employee_list($month));
+		$this->set('one_year_employee_list', $this->model->get_one_year_employee_list($month));
 		$this->set('contract_list', $this->model->get_contract_list($employee_map, $month));
 		$this->set('regular_list', $this->model->get_regular_list($employee_map, $month));
 		$this->set('vacation_date_list', $this->model->get_vacation_date_list($employee_map, $month));
@@ -76,6 +82,8 @@ class TopPage extends MY_Controller {
 		//各項目
 		$this->set('hire_list_col', $this->model->get_hire_list_col());
 		$this->set('retirement_list_col', $this->model->get_retirement_list_col());
+		$this->set('halr_year_employee_list_col', $this->model->get_halr_year_employee_list_col());
+		$this->set('one_year_employee_list_col', $this->model->get_one_year_employee_list_col());
 		$this->set('contract_list_col', $this->model->get_contract_list_col());
 		$this->set('regular_list_col', $this->model->get_regular_list_col());
 		$this->set('vacation_date_list_col', $this->model->get_vacation_date_list_col());

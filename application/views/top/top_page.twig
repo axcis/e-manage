@@ -9,6 +9,8 @@
 {{ header.javascript_start }}
 	{{ header.responsive_js("hire-table") }}
 	{{ header.responsive_js("retirement-table") }}
+	{{ header.responsive_js("halr-year-employee-list-table") }}
+	{{ header.responsive_js("one-year-employee-list-table") }}
 	{{ header.responsive_js("contract-table") }}
 	{{ header.responsive_js("regular-table") }}
 	{{ header.responsive_js("vacation-date-table") }}
@@ -50,6 +52,10 @@
 			{{ include('top/hire_list.twig') }}
 			{{ main.spacer }}
 			{{ include('top/retirement_list.twig') }}
+			{{ main.spacer }}
+			{{ include('top/half_year_employee_list.twig') }}
+			{{ main.spacer }}
+			{{ include('top/one_year_employee_list.twig') }}
 			{{ main.spacer }}
 			{{ include('top/contract_list.twig') }}
 			{{ main.spacer }}

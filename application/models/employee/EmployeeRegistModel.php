@@ -99,6 +99,8 @@ class EmployeeRegistModel extends MY_Model {
 		$this->add_col_val(EmployeeDao::COL_NAME, $input['name']);
 		$this->add_col_val(EmployeeDao::COL_HIRAGANA, $input['hiragana']);
 		$this->add_col_val(EmployeeDao::COL_HIRE_DATE, $input['hire_date']);
+		$this->add_col_val(EmployeeDao::COL_HALF_HIRE_DATE, $this->get_add_date($input['hire_date'], 6));
+		$this->add_col_val(EmployeeDao::COL_ONE_YEAR_HIRE_DATE, $this->get_add_date($input['hire_date'], 12));
 		$this->add_col_val(EmployeeDao::COL_RETIREMENT, '0');
 		
 		$employee_id = $this->do_insert_get_id();
@@ -167,6 +169,8 @@ class EmployeeRegistModel extends MY_Model {
 		$this->add_col_val(EmployeeDao::COL_NAME, $input['name']);
 		$this->add_col_val(EmployeeDao::COL_HIRAGANA, $input['hiragana']);
 		$this->add_col_val(EmployeeDao::COL_HIRE_DATE, $input['hire_date']);
+		$this->add_col_val(EmployeeDao::COL_HALF_HIRE_DATE, $this->get_add_date($input['hire_date'], 6));
+		$this->add_col_val(EmployeeDao::COL_ONE_YEAR_HIRE_DATE, $this->get_add_date($input['hire_date'], 12));
 		
 		if (isset($input['retirement'])) {
 			$this->add_col_val(EmployeeDao::COL_RETIREMENT, '1');

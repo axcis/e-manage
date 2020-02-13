@@ -1,0 +1,24 @@
+<h4>入社一年経過社員情報</h4>
+{% if one_year_employee_list|length == 0 %}
+	{{ main.info_msg("入社一年経過社員情報はありません。")}}
+{% else %}
+	<div id="one-year-employee-list-table">
+		<table class="list-table">
+			<thead>
+				<tr class="list-head">
+					{% for item in one_year_employee_list_col %}
+						<td class="width-{{ item.width }}">{{ item.value }}</td>
+					{% endfor %}
+				</tr>
+			</thead>
+			<tbody id="container">
+				{% for key,item in one_year_employee_list %}
+					<tr>
+						<td class="ta-center">{{ item.name }}</td>
+						<td class="ta-center">{{ item.one_year_hire_date|date('Y年n月j日') }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endif %}
