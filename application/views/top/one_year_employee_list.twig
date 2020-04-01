@@ -1,3 +1,5 @@
+{% import 'parts/main_body.twig' as main %}
+
 <h4>入社一年経過社員情報</h4>
 {% if one_year_employee_list|length == 0 %}
 	{{ main.info_msg("入社一年経過社員情報はありません。")}}
