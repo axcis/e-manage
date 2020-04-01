@@ -1,3 +1,5 @@
+{% import 'parts/main_body.twig' as main %}
+
 <h4>有休付与情報</h4>
 {% if vacation_date_list|length == 0 %}
 	{{ main.info_msg("有休付与情報はありません。")}}

@@ -1,3 +1,5 @@
+{% import 'parts/main_body.twig' as main %}
+
 <h4>資格手当付与情報</h4>
 {% if allowance_list|length == 0 %}
 	{{ main.info_msg("資格手当付与情報はありません。")}}

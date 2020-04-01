@@ -1,3 +1,5 @@
+{% import 'parts/main_body.twig' as main %}
+
 <h4>契約社員登用情報</h4>
 {% if contract_list|length == 0 %}
 	{{ main.info_msg("契約社員登用情報はありません。")}}
